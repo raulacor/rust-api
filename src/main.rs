@@ -1,3 +1,13 @@
-fn main() {
-    println!("Hello, world!");
+use actix_web::{App, HttpServer};
+
+mod services;
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    println!("Hello World");
+
+    HttpServer::new(move || App::new().configure(services::config))
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }
